@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registro o inicio de sesion</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estiloRegistro.css') }}" />
+    <title>Login |CódigoMasters|</title>
+    <link rel="stylesheet" href="estiloRegistro.css">
 </head>
 <body>
     <div class="contenedor-form">
@@ -23,11 +23,13 @@
         <div class="formulario">
             <h2>Crea tu Cuenta</h2>
             <form action="#">
-                <input type="text" placeholder="Universidad" required>
+                <input type="text" placeholder="Usuario" required>
 
-                <input type="text" placeholder="Nombre" required>
+                <input type="password" placeholder="Contraseña" required>
 
-                <input type="password" placeholder="Conraseña" required>
+                <input type="email" placeholder="Correo Electronico" required>
+
+                <input type="text" placeholder="Teléfono" required>
 
                 <input type="submit" value="Registrarse">
             </form>
@@ -36,7 +38,7 @@
             <a href="#">¿Olvidaste tu contraseña?</a>
         </div>
     </div>
-    <script type=text/javascript src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
-    <script type=text/javascript src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

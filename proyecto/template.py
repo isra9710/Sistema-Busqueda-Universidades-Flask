@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-
+from flask_mysqldb import MySQL
 app = Flask(__name__)
 
 
@@ -23,6 +23,11 @@ def cliente():
 
 @app.route('/registro')
 def registro():
+    return render_template('registro.html')
+
+
+@app.route('/iniciarSesion')
+def iniciarSesion():
     return render_template('registro.html')
 
 

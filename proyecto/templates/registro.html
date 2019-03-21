@@ -13,21 +13,21 @@
 
         <div class="formulario">
             <h2>Iniciar Sesión</h2>
-            <form action="#">
-                <input type="text" placeholder="Usuario" required>
-                <input type="password" placeholder="Contraseña" required>
+            <form action="/registro">
+                <input type="text" name="nombreInicio" placeholder="Correo" required>
+                <input type="password" name="contraInicio" placeholder="Contraseña" required>
                 <input type="submit" value="Iniciar Sesión">
             </form>
         </div>
 
         <div class="formulario">
             <h2>Crea tu Cuenta</h2>
-            <form action="#">
-                <input type="text" placeholder="Universidad" required>
+            <form action="/iniciarSesion">
+                <input type="text" name="uni" placeholder="Universidad" required>
 
-                <input type="text" placeholder="Nombre" required>
+                <input type="text" name="nombre" placeholder="Correo" required>
 
-                <input type="password" placeholder="Conraseña" required>
+                <input type="password" name="contra" placeholder="Conraseña" required>
 
                 <input type="submit" value="Registrarse">
             </form>

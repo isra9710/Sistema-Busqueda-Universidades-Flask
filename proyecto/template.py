@@ -1,8 +1,8 @@
 from flask import Flask, render_template
-from flask_mysqldb import MySQL
+import pymysql
 app = Flask(__name__)
-
-
+con = pymysql.connect("localhost", "root", "", "base")
+cur = con.cursor()
 @app.route('/')
 def hello():
    return render_template('index.html', name='Isra')
@@ -23,12 +23,27 @@ def cliente():
 
 @app.route('/registro')
 def registro():
-    return render_template('registro.html')
+    consulta=cur.execute("select nombre_universidad from Universidad")
+    listat = cur.fetchall()
+    lista = list(sum(listat, ()))
+    for e in lista:
+        print(e)
+    return render_template('registro.html', listaU=lista)
+
+
+@app.route('/registrado')
+def registrado():
+    return render_template('registrado.html')
 
 
 @app.route('/iniciarSesion')
 def iniciarSesion():
     return render_template('registro.html')
+
+
+@app.route('/sesionIniciada')
+def sesionIniciad():
+    return render_template('sesionIniciada.html')
 
 
 if __name__ == "__main__":

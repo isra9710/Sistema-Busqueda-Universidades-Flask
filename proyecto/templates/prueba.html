@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba</title>
+</head>
+<body>
+<div class="formulario">
+            <h2>Crea tu Cuenta</h2>
+            <form action="/iniciarSesion">
+                <label>Universidad:</label>
+                <select name="uni" class="universidad">
+                   {% for e in listaU %}
+                    <option value="uni">{{ e }}</option>
+
+                {% endfor %}
+                </select>
+
+                <input type="text" name="nombre" placeholder="Correo" required>
+
+                <input type="password" name="contra" placeholder="Conraseña" required>
+
+                <input type="submit" value="Registrarse">
+
+            </form>
+        </div>
+        <div class="reset-password">
+            <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
+    </div>
+
+</body>
+</html>

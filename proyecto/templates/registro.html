@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Registro o inicio de sesion</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estiloRegistro.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/selectTagUni.css') }}" />
 </head>
 <body>
     <div class="contenedor-form">
@@ -13,7 +14,7 @@
 
         <div class="formulario">
             <h2>Iniciar Sesión</h2>
-            <form action="/registro">
+            <form action="/sesionIniciada" method="POST">
                 <input type="text" name="nombreInicio" placeholder="Correo" required>
                 <input type="password" name="contraInicio" placeholder="Contraseña" required>
                 <input type="submit" value="Iniciar Sesión">
@@ -22,9 +23,17 @@
 
         <div class="formulario">
             <h2>Crea tu Cuenta</h2>
-            <form action="/iniciarSesion">
-                <input type="text" name="uni" placeholder="Universidad" required>
-
+            <form action="/registrado" method="POST">
+                <label>Universidad</label>
+                <div class="custom-select" style="width:200px;">
+                    <select>
+                        {% for e in listaU %}
+                            <option value="{{ e }}">{{ e }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <script type=text/javascript src="{{ url_for('static', filename='js/selectTagUni.js') }}"></script>
+                <br><br>
                 <input type="text" name="nombre" placeholder="Correo" required>
 
                 <input type="password" name="contra" placeholder="Conraseña" required>

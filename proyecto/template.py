@@ -6,10 +6,10 @@ conexion = pymysql.connect("localhost", "root", "", "base")
 cur = conexion.cursor()
 @app.route('/')
 def hello():
-   return render_template('index.html', name='Isra')
+   return render_template('Index.html')
 
 
-@app.route('/registro', methods=['GET', 'POST'])
+@app.route('/registroLogin', methods=['GET', 'POST'])
 def registro():
     cur.execute("select nombre_universidad from Universidad")
     listat = cur.fetchall()
@@ -90,6 +90,29 @@ def sesionIniciada():
             print("No se inicio sesion")
             return redirect(url_for('registro'))
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+
+@app.route('/universidades')
+def universidades():
+    return render_template('Universidades.html')
+
+
+@app.route('/top10')
+def top10():
+    return render_template('Top10.html')
+
+
+@app.route('/crud_top10')
+def crud_top10():
+    return render_template('Crud_Top10.html')
+
+
+@app.route('/crud_universidades')
+def crud_universidades():
+    return render_template('Crud_Universidades.html')
 
 
 if __name__ == "__main__":

@@ -92,7 +92,7 @@ def sesionIniciada():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('admin/home.html')
 
 
 @app.route('/universidades')
@@ -107,12 +107,12 @@ def top10():
 
 @app.route('/crud_top10')
 def crud_top10():
-    return render_template('Crud_Top10.html')
+    return render_template('admin/Crud_Top10.html')
 
 
 @app.route('/crud_universidades')
 def crud_universidades():
-    return render_template('Crud_Universidades.html')
+    return render_template('admin/Crud_Universidades.html')
 
 
 if __name__ == "__main__":

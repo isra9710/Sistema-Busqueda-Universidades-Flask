@@ -1,0 +1,104 @@
+
+h1{
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 40px;
+}
+
+.center-block{
+   
+position: absolute;
+  width: 100%;
+  top: 50%;
+  margin-top: -15px; /* 50% of the line-height in a */
+  text-align: center;
+
+}
+.compara{
+	padding-bottom: 60px;
+	padding-top: 40px;
+}
+.boton{
+	
+}
+
+body{
+	background-color:#F2F2F2;
+}
+
+.main{
+	padding-top: 40px;
+}
+
+article{
+	padding-top: 10px;
+}
+
+.barra1{
+	padding-bottom: 20px;
+}
+
+.uni-art{
+	width: 200px;
+	height: 200px;
+
+}
+
+.descripcion{
+	padding-top: 15px;
+}
+
+.admin-img{
+	width: 300px;
+	height:300px;
+}
+
+
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-image:url("Media/wall1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding-bottom: 10px;
+  }
+
+.bg-image {
+  /* The image used */
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(0px);
+  
+}
+
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 80%;
+  padding: 20px;
+  text-align: center;
+}
+
+
+.bg-black {
+  background-color: #161616 !important;
+}
+
+
+footer {
+  padding: 5rem 0;
+}
+
+.index-main{
+	padding-top: 10rem;
+	padding-bottom: 10rem;
+}

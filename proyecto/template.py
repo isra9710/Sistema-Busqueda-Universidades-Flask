@@ -56,7 +56,7 @@ def registrado():
         else:
             print("entra al else")
             flash("Ese correo ya esta registrado")
-            return redirect(url_for('registro'))
+            return redirect(url_for('registroLogin'))
 
 
 @app.route('/iniciandoSesion', methods=['GET', 'POST'])
@@ -88,7 +88,7 @@ def sesionIniciada():
             return render_template('sesionIniciada.html')
         else:
             print("No se inicio sesion")
-            return redirect(url_for('registro'))
+            return redirect(url_for('registroLogin'))
 
 @app.route('/home')
 def home():

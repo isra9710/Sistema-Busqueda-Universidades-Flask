@@ -14,7 +14,7 @@
 
         <div class="formulario">
             <h2>Iniciar Sesión</h2>
-            <form action="/sesionIniciada" method="POST">
+            <form action="/iniciandoSesion" method="POST" name="login">
                 <input type="text" name="nombreInicio" placeholder="Correo" required>
                 <input type="password" name="contraInicio" placeholder="Contraseña" required>
                 <input type="submit" value="Iniciar Sesión">
@@ -23,10 +23,10 @@
 
         <div class="formulario">
             <h2>Crea tu Cuenta</h2>
-            <form action="/registrado" method="POST">
+            <form action="/registrandote" method="POST" name="registro">
                 <label>Universidad</label>
                 <div class="custom-select" style="width:200px;">
-                    <select>
+                    <select name="nombreUni">
                         {% for e in listaU %}
                             <option value="{{ e }}">{{ e }}</option>
                         {% endfor %}

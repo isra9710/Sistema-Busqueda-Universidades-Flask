@@ -63,7 +63,7 @@ def hello():
 
 
 @app.route('/registroLogin', methods=['GET', 'POST'])
-def registro():
+def registroLogin():
     cur.execute("select nombre_universidad from Universidad")
     listat = cur.fetchall()
     lista = list(sum(listat, ()))
@@ -80,36 +80,41 @@ def registrado():
     nombreUni = request.form.get("nombreUni")
     nombre = request.form.get("nombre")
     contra = request.form.get("contra")
-    nombreAux=None
-    id_universidad=None
-    print(nombreUni)
-    print(nombre)
-    print(contra)
-    consulta=("select nombre_usuario from Usuario where nombre_usuario=%s;")
-    cur.execute(consulta, (nombre))
-    lista=cur.fetchone()
-    if lista!= None:
-        for e in lista:
-            nombreAux=e
-    print(nombreAux)
-    consulta="select id_universidad from Universidad where nombre_universidad = %s;"
-    cur.execute(consulta, (nombreUni))
-    lista=cur.fetchone()
-    if lista!= None:
-        for e in lista:
-            id_universidad=e
-    print(id_universidad)
-    if request.method =="POST":
-        if nombreAux != nombre:
-                consulta = ("insert into Usuario (id_universidad, nombre_usuario, contra_usuario) values(%s, %s, %s);")
-                cur.execute(consulta, (id_universidad, nombre, contra))
-                conexion.commit()
-                print("terminado")
-                return render_template('registrado.html')
-        else:
-            print("entra al else")
-            flash("Ese correo ya esta registrado")
-            return redirect(url_for('registroLogin'))
+    if nombreUni != "novalido":
+        nombreAux=None
+        id_universidad=None
+        print(nombreUni)
+        print(nombre)
+        print(contra)
+        consulta=("select nombre_usuario from Usuario where nombre_usuario=%s;")
+        cur.execute(consulta, (nombre))
+        lista=cur.fetchone()
+        if lista!= None:
+            for e in lista:
+                nombreAux=e
+        print(nombreAux)
+        consulta="select id_universidad from Universidad where nombre_universidad = %s;"
+        cur.execute(consulta, (nombreUni))
+        lista=cur.fetchone()
+        if lista!= None:
+            for e in lista:
+                id_universidad=e
+        print(id_universidad)
+        if request.method =="POST":
+            if nombreAux != nombre:
+                    consulta = ("insert into Usuario (id_universidad, nombre_usuario, contra_usuario) values(%s, %s, %s);")
+                    cur.execute(consulta, (id_universidad, nombre, contra))
+                    conexion.commit()
+                    print("terminado")
+                    return render_template('registrado.html')
+            else:
+                print("entra al else")
+                flash("Ese correo ya esta registrado")
+                return redirect(url_for('registroLogin'))
+    else:
+        print("entra al else")
+        print(nombreUni)
+        return redirect(url_for('registroLogin'))
 
 
 @app.route('/iniciandoSesion', methods=['GET', 'POST'])
@@ -143,10 +148,6 @@ def sesionIniciada():
             print("No se inicio sesion")
             return redirect(url_for('registroLogin'))
 
-@app.route('/home')
-def home():
-    return render_template('admin/home.html')
-
 
 @app.route('/universidades')
 def universidades():
@@ -158,9 +159,24 @@ def top10():
     return render_template('Top10.html')
 
 
+@app.route('/home')
+def home():
+    return render_template('admin/home.html')
+
+
 @app.route('/crud_top10')
 def crud_top10():
     return render_template('admin/Crud_Top10.html')
+
+
+@app.route('/universidades_admin')
+def universidades_admin():
+    return render_template('admin/Universidades_admin.html')
+
+
+@app.route('/top10_admin')
+def top10_admin():
+    return render_template('admin/Top10_admin.html')
 
 
 @app.route('/crud_universidades')

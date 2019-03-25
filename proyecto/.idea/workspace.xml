@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27535cda-b7b3-4f1a-ade7-b45c61f9519b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/busquedaUniversidad.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/Top10_admin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/Universidades_admin.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registrado.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template.py" beforeDir="false" afterPath="$PROJECT_DIR$/template.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/Crud_Top10.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/Crud_Top10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/Crud_Universidades.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/Crud_Universidades.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registroLogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registroLogin.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1053">
-              <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+            <state relative-caret-position="-707">
+              <caret line="116" column="46" selection-start-line="116" selection-start-column="46" selection-end-line="116" selection-end-column="46" />
               <folding>
                 <element signature="e#0#93#0" expanded="true" />
               </folding>
@@ -27,11 +33,86 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/Index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-48">
-              <caret line="115" column="120" selection-start-line="115" selection-start-column="120" selection-end-line="115" selection-end-column="120" />
+            <state relative-caret-position="195">
+              <caret line="133" column="37" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/registrado.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/Crud_Universidades.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="65" column="70" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/registroLogin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="67" column="38" lean-forward="true" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="48" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#form#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/Universidades_admin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="73" column="79" selection-start-line="73" selection-start-column="79" selection-end-line="73" selection-end-column="79" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/Top10_admin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/Top10.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/Crud_Top10.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1260">
+              <caret line="84" column="18" lean-forward="true" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/admin/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="78" column="79" lean-forward="true" selection-start-line="73" selection-start-column="20" selection-end-line="78" selection-end-column="79" />
             </state>
           </provider>
         </entry>
@@ -63,7 +144,6 @@
         <option value="$PROJECT_DIR$/templates/prueba.html" />
         <option value="$PROJECT_DIR$/static/js/selectTagUni.js" />
         <option value="$PROJECT_DIR$/static/css/selectTagUni.css" />
-        <option value="$PROJECT_DIR$/templates/registrado.html" />
         <option value="$PROJECT_DIR$/templates/sesionIniciada.html" />
         <option value="$PROJECT_DIR$/templates/registro.html" />
         <option value="$PROJECT_DIR$/static/css/custom.css" />
@@ -73,13 +153,16 @@
         <option value="$PROJECT_DIR$/static/css/estiloRegistro.css" />
         <option value="$PROJECT_DIR$/templates/Universidades.html" />
         <option value="$PROJECT_DIR$/templates/Top10.html" />
-        <option value="$PROJECT_DIR$/templates/admin/Crud_Universidades.html" />
-        <option value="$PROJECT_DIR$/templates/admin/Crud_Top10.html" />
-        <option value="$PROJECT_DIR$/templates/admin/home.html" />
-        <option value="$PROJECT_DIR$/templates/registroLogin.html" />
         <option value="$PROJECT_DIR$/templates/busquedaUniversidad.html" />
-        <option value="$PROJECT_DIR$/templates/Index.html" />
+        <option value="$PROJECT_DIR$/templates/admin/home.html" />
+        <option value="$PROJECT_DIR$/templates/admin/Universidades_admin.html" />
+        <option value="$PROJECT_DIR$/templates/admin/Crud_Top10.html" />
+        <option value="$PROJECT_DIR$/templates/admin/Crud_Universidades.html" />
+        <option value="$PROJECT_DIR$/templates/admin/Top10_admin.html" />
+        <option value="$PROJECT_DIR$/templates/registrado.html" />
+        <option value="$PROJECT_DIR$/templates/registroLogin.html" />
         <option value="$PROJECT_DIR$/template.py" />
+        <option value="$PROJECT_DIR$/templates/Index.html" />
       </list>
     </option>
   </component>
@@ -110,10 +193,6 @@
               <item name="proyecto" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="proyecto" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -127,6 +206,9 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/admin" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/static/js" />
       <recent name="$PROJECT_DIR$/static/stylesheets" />
@@ -189,7 +271,7 @@
     <frame x="0" y="30" width="1366" height="738" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1280303" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23863636" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -263,13 +345,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registrado.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -358,48 +433,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/Crud_Top10.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="98" column="16" lean-forward="true" selection-start-line="98" selection-start-column="16" selection-end-line="98" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/Crud_Universidades.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/admin/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="86" column="58" lean-forward="true" selection-start-line="86" selection-start-column="58" selection-end-line="86" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/Universidades.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="973">
           <caret line="73" column="21" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Top10.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registroLogin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="67" column="67" selection-start-line="67" selection-start-column="67" selection-end-line="67" selection-end-column="67" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -410,20 +447,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/Index.html">
+    <entry file="file://$PROJECT_DIR$/templates/Top10.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-48">
-          <caret line="115" column="120" selection-start-line="115" selection-start-column="120" selection-end-line="115" selection-end-column="120" />
+        <state relative-caret-position="291">
+          <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/Universidades_admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="73" column="79" selection-start-line="73" selection-start-column="79" selection-end-line="73" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/Top10_admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="70" column="24" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="78" column="79" lean-forward="true" selection-start-line="73" selection-start-column="20" selection-end-line="78" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/Crud_Universidades.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="65" column="70" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/admin/Crud_Top10.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1260">
+          <caret line="84" column="18" lean-forward="true" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/registrado.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="28" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/registroLogin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="67" column="38" lean-forward="true" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#form#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/template.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1053">
-          <caret line="60" column="12" selection-start-line="60" selection-start-column="12" selection-end-line="60" selection-end-column="12" />
+        <state relative-caret-position="-707">
+          <caret line="116" column="46" selection-start-line="116" selection-start-column="46" selection-end-line="116" selection-end-column="46" />
           <folding>
             <element signature="e#0#93#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/Index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="133" column="37" selection-start-line="133" selection-start-column="37" selection-end-line="133" selection-end-column="37" />
         </state>
       </provider>
     </entry>

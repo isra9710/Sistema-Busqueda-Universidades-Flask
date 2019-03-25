@@ -31,9 +31,9 @@
 					
 					
 			</ul>
-			<form class="form-inline my-2 my-lg-0 ">
-			      <input class="form-control mr-sm-2" type="search" placeholder="Universidad">
-			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+			<form class="form-inline my-2 my-lg-0 " method="POST" action="/buscar_universidad">
+			      <input class="form-control mr-sm-2" type="text" placeholder="Universidad" name="nombreUniversidad">
+			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
 			    </form>
 		</nav>
 
@@ -103,46 +103,45 @@
 
 
 	<!--------------------------------- F O R M S---------------------------------------->
-	<div class="container compara">
-	<div class="form-group row">
-	    <label for="colFormLabel" class="col-sm-2 col-form-label">Universidad 1</label>
-	    <div class="col-sm-4">
-	      <input type="email" class="form-control" id="colFormLabel" placeholder="nombre de la universidad">
-	    </div>
+	<form class="form-inline my-2 my-lg-0 " method="POST" action="/buscar_universidades">
+		<div class="container compara">
+		<div class="form-group row">
+			<label for="colFormLabel" class="col-sm-2 col-form-label">Universidad 1</label>
+			<div class="col-sm-4">
+			  <input type="text" class="form-control" name="universidad1" placeholder="nombre de la universidad" value={{ universidad1 }} >
+			</div>
 
-	    <label for="colFormLabel" class="col-sm-2 col-form-label">Universidad 2</label>
-	    <div class="col-sm-4">
-	      <input type="email" class="form-control" id="colFormLabel" placeholder="nombre de la universidad">
-	 </div>
+			<label for="colFormLabel" class="col-sm-2 col-form-label">Universidad 2</label>
+			<div class="col-sm-4">
+			  <input type="text" class="form-control" name="universidad2" placeholder="nombre de la universidad" value={{ universidad2 }}>
+		 </div>
 
-	</div class="center-block">
+		</div class="center-block">
 
-  	<!--------------------------------- B O T O N ---------------------------------------->
-  		<div class="container">
-  			<div class="row justify-content-md-center">
-  			<button type="button" class="btn btn-outline-primary">Comparar</button>
-  			</div>	
-  		</div>
-  		
-	</div>
-	
+		<!--------------------------------- B O T O N ---------------------------------------->
+			<div class="container">
+				<div class="row justify-content-md-center">
+				<button type="submit" class="btn btn-outline-primary">Comparar</button>
+				</div>
+			</div>
 
+		</div>
 <!--------------------------------- F O R M S---------------------------------------->
 	<div class="container">
 	<div class="form-group row index-main">
-	    <label for="colFormLabel" class="col-sm-2 col-form-label">Puntuación</label>
+	    <label  class="col-sm-2 col-form-label">Puntuación</label>
 	    <div class="col-sm-4">
-	      <input type="email" class="form-control" id="colFormLabel" placeholder="universidad 1">
+	      <input type="number" class="form-control" name="promedio1" placeholder="puntuacion" value={{ promedio1}} readonly>
 	    </div>
 
-	    <label for="colFormLabel" class="col-sm-2 col-form-label"> Puntuación</label>
+	    <label  class="col-sm-2 col-form-label"> Puntuación</label>
 	    <div class="col-sm-4">
-	      <input type="email" class="form-control" id="colFormLabel" placeholder="universidad 2">
+	      					<input type="number" class="form-control" name="promedio2" placeholder="puntuacion" value={{ promedio2}} readonly>
 	 </div>
 
 	</div class="center-block">
 	</div>
-
+	</form>
 
 
 

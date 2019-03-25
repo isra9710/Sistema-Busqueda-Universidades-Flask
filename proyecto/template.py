@@ -4,9 +4,62 @@ app = Flask(__name__)
 app.secret_key = "123"
 conexion = pymysql.connect("localhost", "root", "", "base")
 cur = conexion.cursor()
-@app.route('/')
+nombreUniversidad=None
+
+
+@app.route('/buscar_universidad', methods=['GET', 'POST'])
+def buscarUniversidad():
+    nombreUniversidad=request.form.get("nombreUniversidad")
+    nombre=None
+    promedio=None
+    consulta="select *from Universidad where nombre_universidad=%s"
+    cur.execute(consulta, nombreUniversidad)
+    tupla=cur.fetchone()
+    if tupla is None:
+        redirect(url_for('/'))
+    else:
+        consulta = "select nombre_universidad from Universidad where nombre_universidad=%s"
+        cur.execute(consulta, nombreUniversidad)
+        lista=cur.fetchone()
+        for e in lista:
+            nombre=e
+        consulta = "select promedio from Universidad where nombre_universidad=%s"
+        cur.execute(consulta, nombreUniversidad)
+        lista=cur.fetchone()
+        for e in lista:
+            promedio=e
+        return render_template('busquedaUniversidad.html', nombre=nombre, promedio=promedio)
+
+
+@app.route('/buscar_universidades', methods=['GET', 'POST'])
+def buscarUniversidades():
+    universidad1=request.form.get("universidad1")
+    universidad2=request.form.get("universidad2")
+    print(universidad1)
+    print(universidad2)
+    promedio1=None
+    promedio2=None
+    consulta="select promedio from Universidad where nombre_universidad=%s"
+    cur.execute(consulta, universidad1)
+    tupla1=cur.fetchone()
+    consulta = "select promedio from Universidad where nombre_universidad=%s"
+    cur.execute(consulta, universidad2)
+    tupla2=cur.fetchone()
+    if tupla1 is None or tupla2 is None:
+        redirect(url_for('/'))
+    else:
+        for e in tupla1:
+            promedio1=e
+        for e in tupla2:
+            promedio2=e
+        print(promedio1)
+        print(promedio2)
+        return render_template('Index.html', universidad1=universidad1, universidad2=universidad2, promedio1=promedio1, promedio2=promedio2)
+
+
+@app.route('/', methods=['GET', 'POST'])
 def hello():
-   return render_template('Index.html')
+    return render_template('Index.html')
 
 
 @app.route('/registroLogin', methods=['GET', 'POST'])

@@ -7,6 +7,13 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/selectTagUni.css') }}" />
 </head>
 <body>
+{% with messages= get_flashed_messages() %}
+	{% if messages %}
+		{% for meessage in messages %}
+			<h3>{{ message }}</h3>
+        {% endfor %}
+	{% endif %}
+{% endwith %}
 <header>
     <div class="container">
 			<nav class="navbar navbar-expand-md navbar-dark bg-dark">

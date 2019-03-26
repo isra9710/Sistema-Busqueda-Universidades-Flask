@@ -18,6 +18,13 @@
 </head>
 
 <body>
+{% with messages= get_flashed_messages() %}
+	{% if messages %}
+		{% for meessage in messages %}
+			<h1>{{ meessage }}</h1>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
 	<header>
 		<!---------------------------------BARRA1---------------------------------------->
 			
@@ -108,12 +115,12 @@
 		<div class="form-group row">
 			<label for="colFormLabel" class="col-sm-2 col-form-label">Universidad 1</label>
 			<div class="col-sm-4">
-			  <input type="text" class="form-control" name="universidad1" placeholder="nombre de la universidad" value={{ universidad1 }} >
+			  <input type="text" required class="form-control" name="universidad1" placeholder="nombre de la universidad" value={{ universidad1 }} >
 			</div>
 
 			<label for="colFormLabel" class="col-sm-2 col-form-label">Universidad 2</label>
 			<div class="col-sm-4">
-			  <input type="text" class="form-control" name="universidad2" placeholder="nombre de la universidad" value={{ universidad2 }}>
+			  <input type="text" required class="form-control" name="universidad2" placeholder="nombre de la universidad" value={{ universidad2 }}>
 		 </div>
 
 		</div class="center-block">

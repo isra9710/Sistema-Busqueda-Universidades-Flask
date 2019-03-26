@@ -220,32 +220,36 @@ def crud_universidades():
 def agregar():
     nombreAdmin = request.form.get("nombreAdmin")
     nombreUniversidad = request.form.get("nombreNuevo")
+    nombreAux=None
+    id_admin=None
     print(nombreAdmin)
     print(nombreUniversidad)
     consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
     cur.execute(consulta, nombreUniversidad)
     lista=cur.fetchall()
-    for e in lista:
-        print(e)
-    if lista != None:
+    print(lista)
+    if lista!=None:
+        for e in lista:
+            print(e)
+            nombreAux=e
+    if nombreUniversidad==nombreAux:
         print("Esa universidad ya esta registrada")
         flash("Esa universidad ya existe!")
         return redirect(url_for('mostrar_universidades'))
     else:
         print("Estas procediendo a registrarla")
-        consulta=("select id_admin from Administrador where nombre_admin=%s;")
+        consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
         cur.execute(consulta, nombreAdmin)
-        lista=cur.fetchall()
+        lista = cur.fetchall()
+        print(lista)
         for e in lista:
-            id_admin=e
+            id_admin = e
             print(e)
-
         consulta = ("insert into Universidad (id_administrador, nombre_universidad, promedio) values(%s, %s, %s);")
         cur.execute(consulta, (id_admin, nombreUniversidad, 0.0))
         conexion.commit()
         flash("Se agrego universidad con exito")
         return redirect(url_for('mostrar_universidades'))
-
 
 
 @app.route('/editar')

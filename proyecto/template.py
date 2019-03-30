@@ -163,6 +163,11 @@ def sesionIniciada():
             return redirect(url_for('registroLogin'))
 
 
+@app.route('/crud_universidades')
+def crud_universidades():
+    return render_template('admin/Crud_Universidades.html')
+
+
 @app.route('/mostrar_universidades')
 def mostrar_universidades():
     consulta = ("select * from Universidad;")

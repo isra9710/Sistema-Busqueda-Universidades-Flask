@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="27535cda-b7b3-4f1a-ade7-b45c61f9519b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/template.py" beforeDir="false" afterPath="$PROJECT_DIR$/template.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/mostrar_universidades.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/mostrar_universidades.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,11 +12,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/template.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="310" column="21" lean-forward="true" selection-start-line="310" selection-start-column="12" selection-end-line="310" selection-end-column="21" />
+            <state relative-caret-position="288">
+              <caret line="316" column="21" selection-start-line="316" selection-start-column="21" selection-end-line="316" selection-end-column="21" />
               <folding>
                 <element signature="e#0#93#0" expanded="true" />
               </folding>
@@ -52,7 +51,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/admin/mostrar_universidades.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
@@ -152,15 +151,14 @@
         <option value="$PROJECT_DIR$/templates/editar_uni.html" />
         <option value="$PROJECT_DIR$/templates/admin/home.html" />
         <option value="$PROJECT_DIR$/templates/admin/editar_uni.html" />
-        <option value="$PROJECT_DIR$/template.py" />
         <option value="$PROJECT_DIR$/templates/admin/mostrar_universidades.html" />
+        <option value="$PROJECT_DIR$/template.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1618" />
-    <option name="y" value="160" />
-    <option name="width" value="673" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="y" value="30" />
+    <option name="width" value="1360" />
     <option name="height" value="738" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -283,7 +281,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1360" y="2" width="1360" height="768" extended-state="6" />
+    <frame x="0" y="2" width="1360" height="768" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49887133" visible="true" weight="0.20776255" />
@@ -477,16 +475,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="310" column="21" lean-forward="true" selection-start-line="310" selection-start-column="12" selection-end-line="310" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#93#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/admin/mostrar_universidades.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
@@ -494,6 +482,16 @@
           <folding>
             <element signature="n#style#0;n#head#0;n#html#0;n#!!top" />
             <element signature="n#script#2;n#head#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="316" column="21" selection-start-line="316" selection-start-column="21" selection-end-line="316" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#93#0" expanded="true" />
           </folding>
         </state>
       </provider>

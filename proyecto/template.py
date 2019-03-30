@@ -223,7 +223,7 @@ def agregar():
     print(nombreUniversidad)
     consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
     cur.execute(consulta, nombreUniversidad)
-    lista=cur.fetchall()
+    lista=cur.fetchone()
     print(lista)
     if lista!=None:
         for e in lista:
@@ -292,11 +292,13 @@ def editar():
     if (nombreAux==nombre):
         consulta="update Universidad set id_administrador=%s, nombre_universidad=%s;"
         cur.execute(consulta, (id_administrador, nombre))
+        conexion.commit()
         flash("Universidad actualizada con exito")
         return redirect(url_for('mostrar_universidades'))
     elif(nombreAux==None):
         consulta = "update Universidad set id_administrador=%s, nombre_universidad=%s;"
         cur.execute(consulta, (nombre, id_administrador))
+        conexion.commit()
         flash("Universidad actualizada con exito")
         return redirect(url_for('mostrar_universidades'))
 
@@ -312,6 +314,8 @@ def editar():
 def eliminar(id):
     consulta = ("delete from Universidad where id_universidad=%s;")
     cur.execute(consulta, (id))
+    conexion.commit()
+    flash("Universidad eliminada con exito")
     return redirect(url_for('mostrar_universidades'))
 
 

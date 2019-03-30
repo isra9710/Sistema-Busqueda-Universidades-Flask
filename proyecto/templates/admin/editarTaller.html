@@ -15,14 +15,14 @@
                             <div class="form-group">
 
                             <label>ID Universidad anterior: </label>
-							<input type="text" readonly value={{e[]}} class="form-control" name="idUniEditado" required>
+							<input type="text" readonly value={{e[1]}} class="form-control" name="idUniEditado" required>
 						</div>
 						<div class="form-group">
 							<label>ID Administrador</label>
                             <select name="admin">
 
-                        {% for administrador in administradores %}
-                            <option>{{ administrador }}</option>
+                        {% for universidad in universidades %}
+                            <option>{{ universidad }}</option>
                         {% endfor %}
                     </select>
 						</div>

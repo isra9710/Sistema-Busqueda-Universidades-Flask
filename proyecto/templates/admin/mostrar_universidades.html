@@ -308,7 +308,7 @@ $(document).ready(function(){
 						<td>{{ universidad[2] }}</td>
                         <td>{{ universidad[3] }}</td>
                         <td>
-                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <a href="/llenareditar/{{ universidad[0] }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
@@ -351,37 +351,7 @@ $(document).ready(function(){
 		</div>
 	</div>
 
-	<!-- Edit Modal HTML -->
-	<div id="editEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form method="POST" action="{{url_for('editar')}}">
-					<div class="modal-header">
-						<h4 class="modal-title">Editar Universidad</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-              <label>ID Universidad</label>
-							<input type="text"  class="form-control" name="idUniEditado" required>
-						</div>
-						<div class="form-group">
-							<label>ID Administrador</label>
-							<input type="text"  class="form-control" name="idAdminNuevo" required>
-						</div>
-						<div class="form-group">
-							<label>Nombre Universidad</label>
-							<textarea class="form-control" name="nombreEditado" required></textarea>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-info" value="Save">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+
 	<!-- Delete Modal HTML -->
 
 	<div id="deleteEmployeeModal" class="modal fade">
@@ -396,10 +366,12 @@ $(document).ready(function(){
 						<p>¿Estás seguro de querer eliminar esta universidad?</p>
 						<p class="text-warning"><small>Esta acción es permanente.</small></p>
 					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<input type="submit" class="btn btn-danger" value="Delete">
-					</div>
+					<a class="modal-footer">
+						<a type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</a>
+						<a type="submit" class="btn btn-danger" href="/eliminar" >Eliminar</a>
+					</a>
+				</form>
+			</div>
 				</form>
 			</div>
 		</div>

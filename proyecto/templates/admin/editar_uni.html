@@ -1,0 +1,43 @@
+<!-- Edit Modal HTML -->
+	<div id="editEmployeeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form method="POST" action="{{url_for('editar')}}" >
+
+					{% for e in universidad %}
+                    <div class="modal-body">
+						<div class="form-group">
+
+                            <label>ID Universidad</label>
+							<input type="text" readonly value={{e[0]}} class="form-control" name="idUniEditado" required>
+						</div>
+						<div class="form-group">
+                            <div class="form-group">
+
+                            <label>ID Administrador anterior: </label>
+							<input type="text" readonly value={{nombreAdmin}} class="form-control" name="idUniEditado" required>
+						</div>
+						<div class="form-group">
+							<label>ID Administrador</label>
+                            <select name="admin">
+
+                        {% for administrador in administradores %}
+                            <option>{{ administrador }}</option>
+                        {% endfor %}
+                    </select>
+						</div>
+						<div class="form-group">
+							<label>Universidad</label>
+							<input type="text" class="form-control" name="nombreEditado" value={{e[2]}} required>
+						</div>
+					</div>
+                    {% endfor %}
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit"  value="Guardar">
+					</div>
+
+			</div>
+
+	    </div>
+    </div>

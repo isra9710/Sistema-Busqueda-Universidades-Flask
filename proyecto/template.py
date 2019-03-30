@@ -176,7 +176,7 @@ def mostrar_universidades():
         print(e)
     for e in lista:
         print(e[0], e[1], e[2], e[3])
-    return render_template('admin/mostrar_universidades.html', universidades=lista,administradores=administradores)
+    return render_template('admin/mostrar_universidades.html', universidades=lista, administradores=administradores)
 
 
 
@@ -252,7 +252,7 @@ def agregar():
 def llenareditar(id):
     nombreAdmin=None
     id_administrador=None
-    consulta="select * from Universidad where id_universidad=%s";
+    consulta="select * from Universidad where id_universidad=%s"
     cur.execute(consulta, (id))
     tupla=cur.fetchall()
     for e in tupla:
@@ -308,10 +308,11 @@ def editar():
 
 
 
-@app.route('/eliminar', methods=['GET', 'POST'])
-def eliminar():
-
-    return redirect(url_for('crud_universidades'))
+@app.route('/eliminar/<string:id>', methods=['GET', 'POST'])
+def eliminar(id):
+    consulta = ("delete from Universidad where id_universidad=%s;")
+    cur.execute(consulta, (id))
+    return redirect(url_for('mostrar_universidades'))
 
 
 if __name__ == "__main__":

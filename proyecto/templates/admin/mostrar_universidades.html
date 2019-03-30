@@ -309,7 +309,7 @@ $(document).ready(function(){
                         <td>{{ universidad[3] }}</td>
                         <td>
                             <a href="/llenareditar/{{ universidad[0] }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                            <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                            <a href="/eliminar/{{ universidad[0] }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                         </td>
                     </tr>
 {% endfor %}
@@ -353,29 +353,6 @@ $(document).ready(function(){
 
 
 	<!-- Delete Modal HTML -->
-
-	<div id="deleteEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form method="POST" action="{{url_for('eliminar')}}">
-					<div class="modal-header">
-						<h4 class="modal-title">Eliminar Universidad</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<p>¿Estás seguro de querer eliminar esta universidad?</p>
-						<p class="text-warning"><small>Esta acción es permanente.</small></p>
-					</div>
-					<a class="modal-footer">
-						<a type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</a>
-						<a type="submit" class="btn btn-danger" href="/eliminar" >Eliminar</a>
-					</a>
-				</form>
-			</div>
-				</form>
-			</div>
-		</div>
-	</div>
 
 </body>
 </html>

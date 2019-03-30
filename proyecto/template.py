@@ -184,6 +184,15 @@ def mostrar_universidades():
     return render_template('admin/mostrar_universidades.html', universidades=lista, administradores=administradores)
 
 
+@app.route('/mostrar_talleres')
+def mostar_talleres():
+    consulta=("select * from Taller")
+    cur.execute(consulta)
+    lista=cur.fetchall()
+    consulta = ("select * from Universidad;")
+    cur.execute(consulta)
+    tupla = cur.fetchall()
+
 
 @app.route('/universidades')
 def universidades():
@@ -217,7 +226,7 @@ def top10_admin():
 
 
 
-
+#Parte logica del CRUD de universidades
 @app.route('/agregar', methods=['GET', 'POST'])
 def agregar():
     nombreAdmin = request.form.get("nombreAdmin")
@@ -253,7 +262,7 @@ def agregar():
         flash("Se agrego universidad con exito")
         return redirect(url_for('mostrar_universidades'))
 
-@app.route('/llenareditar/<string:id>', methods=['GET', 'POST'])
+@app.route('/llenareditar/<string:id>', methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos de "mostrar universiadades"
 def llenareditar(id):
     nombreAdmin=None
     id_administrador=None
@@ -276,7 +285,7 @@ def llenareditar(id):
     return render_template("admin/editar_uni.html", universidad=tupla, administradores=administradores, nombreAdmin=nombreAdmin)
 
 
-@app.route('/editar', methods=['GET', 'POST'])
+@app.route('/editar', methods=['GET', 'POST'])#esta es en si la que hace el proceso logico de editar
 def editar():
     adminNombre = request.form.get("admin")
     nombre = request.form.get("nombreEditado")
@@ -322,6 +331,17 @@ def eliminar(id):
     conexion.commit()
     flash("Universidad eliminada con exito")
     return redirect(url_for('mostrar_universidades'))
+
+
+#Parte logia del CRUD de talleres
+@app.route('/eliminarTaller/<string:id>', methods=['GET', 'POST'])
+def eliminarTaller(id):
+    consulta = ("delete from Taller where id_talleres=%s;")
+    cur.execute(consulta, (id))
+    conexion.commit()
+    flash("Taller eliminada con exito")
+    return redirect(url_for('mostrar_universidades'))
+
 
 
 if __name__ == "__main__":

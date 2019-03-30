@@ -306,10 +306,10 @@ $(document).ready(function(){
 								<label for="checkbox1"></label>
 							</span>
 						</td>
-                        <td>{{ universidad[0] }}</td>
-                        <td>{{ universidad[1] }}</td>
-						<td>{{ universidad[2] }}</td>
-                        <td>{{ universidad[3] }}</td>
+                        <td>{{ taller[0] }}</td>
+                        <td>{{ taller[1] }}</td>
+						<td>{{ taller[2] }}</td>
+                        <td>{{ taller[3] }}</td>
                         <td>
                             <a href="/llenareditarTaller/{{ taller[0] }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="/eliminarTaller/{{ taller[0] }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -346,10 +346,9 @@ $(document).ready(function(){
 						</div>
 					</div>
                     	<select name="tipoTaller">
-                        <option value="novalido" selected disabled hidden>Selecciona un tipo de taller</option>
-                        {% for universidad in universidades %}
-                            <option>{{ universidad }}</option>
-                        {% endfor %}
+                        <option value="Cultural">Cultural</option>
+							<option value="Deportivo">Deportivo</option>
+							<option value="Academico">Academico</option>
                     </select>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">

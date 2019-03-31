@@ -305,7 +305,6 @@ def editar():
     id_administrador=None
     id_administradorAnterior=None
     nombreAux=None
-    contador=0
     consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
     cur.execute(consulta, adminAnterior)
     tuplaIdAnterior=cur.fetchone()
@@ -417,30 +416,93 @@ def llenareditarTaller(id):
     consulta="select * from Universidad"
     cur.execute(consulta)
     universidades=cur.fetchall()
-    print("Todas las universidades: ")
+    print("Todas las universidades: ", universidades)
     return render_template("admin/editarTaller.html", taller=taller, universidades=universidades, uniAnterior=nombreUniversidadAnterior)
 
 
-
-
-
-@app.route('/editarTaller', methods=['GET', 'POST'])#esta es en si la que hace el proceso logico de editar
+@app.route('/editarTaller', methods=['GET', 'POST'])
 def editarTaller():
+    id_talleres = request.form.get("idTaller")
     nombreUniAnterior = request.form.get("uniAnterior")
     nombreUni= request.form.get("nombreUni")
     nombreAnterior= request.form.get("nombreAnterior")
     nombreNuevo = request.form.get("nombreEditado")
     tipoAnterior=request.form.get("tipoAnterior")
     tipoTaller=request.form.get("tipoTaller")
+    id=1
+    print("Id_taller: ", id_talleres)
+    print("Nombre Anterior de universidad: ", nombreUniAnterior)
+    print("Nombre Nuevo de universidad: ", nombreUni)
+    print("Nombre Anterior de taller: ", nombreAnterior)
+    print("Nombre Nuevo de taller: ", nombreNuevo)
+    print("Tipo anterior de taller: ", tipoAnterior)
+    print("Tipo Nuevo de taller: ", tipoTaller)
+    consultax = ("select * from Taller where nombre_taller=%s AND tipo_taller=%s;")
+    cur.execute(consultax, (nombreNuevo, tipoTaller))
+    tuplax=cur.fetchall()
+    print("Resultado lubea 443:", tuplax)
+
+    id_universidad= None
+
     if nombreNuevo is None:
+        print("Se borro el nombre")
         flash("Ingresa el nombre de taler antes de editar")
         return redirect(url_for('mostrar_talleres'))
-    elif nombreNuevo==nombreAnterior and nombreUni==nombreUniAnterior and  tipoAnterior==tipoTaller:
-        flash("Se actualizo de manera correcta")
-        redirect(url_for('mostrar_talleres'))
+    elif nombreNuevo == nombreAnterior and nombreUni == nombreUniAnterior and tipoAnterior == tipoTaller:
+        print("No se modifico nada")
+        flash("Se actualizo de manera correcta, no se modifico nada por parte del administrador")
+        return redirect(url_for('mostrar_talleres'))
+    elif nombreNuevo == nombreAnterior and nombreUni == nombreUniAnterior and tipoAnterior != tipoTaller:
+        print("Se modifico el tipo de taller")
+        consulta1 = ("update Taller set tipo_taller=%s where id_talleres=%s;")
+        cur.execute(consulta1, (tipoTaller, id_talleres))
+        conexion.commit()
+        flash("Se cambio la categoria del taller con exito")
+        return redirect(url_for('mostrar_talleres'))
     elif nombreUni != nombreUniAnterior:
+        print("El nombre de universidad cambio")
+        print("Linea 464")
+        consulta2 = "select id_universidad from Universidad where nombre_universidad=%s;"
+        cur.execute(consulta2, nombreUni)
+        tupla1 = cur.fetchone()
+        for e in tupla1:
+            id_universidad = e
+        print("Id_universidad nueva: ", id_universidad)
+        consulta3 = ("select * from Taller where id_universidad=%s AND nombre_taller=%s;")
+        cur.execute(consulta3, (id_universidad, nombreNuevo))
+        tupla2 = cur.fetchone()
+        print("Tupla linea 474", tupla2)
+        if tupla2 is None:
+            print("Linea 475")
+            print("No existe un taller con ese nombre en la universidad: ", nombreUniversidad)
+            consulta4 = "update Taller set id_universidad=%s, nombre_taller=%s, tipo_taller=%s where id_talleres=%s;"
+            cur.execute(consulta4, (id_universidad, nombreNuevo, tipoTaller, id_talleres))
+            conexion.commit()
+            flash("Taller actualizado")
+            return redirect(url_for('mostrar_talleres'))
+        else:
+            print("Este taller ya esta registrado en la universidad: ", nombreUniversidad)
+            flash("Ese taller ya se encuntra registrado en esa universidad")
+            return redirect(url_for('mostrar_talleres'))
+    elif nombreNuevo != nombreAnterior and nombreUniAnterior == nombreUni:
+        print("Se cambio el nombre de taller en la misma universidad")
+        print("Linea 486")
+        consulta5 = "select id_universidad from Universidad where nombre_universidad=%s;"
+        cur.execute(consulta5, (nombreUniAnterior))
+        tupla3 = cur.fetchone()
+        for e in tupla3:
+            id_universidad = e
+        consulta6 = ("select * from Taller where id_universidad=%s AND nombre_taller=%s;")
+        cur.execute(consulta6, (id_universidad, nombreNuevo))
+        tupla4=cur.fetchone()
+        print("consulta linea 495: ", tupla4)
+        if tupla4 is not None:
+            flash("Ese taller ya existe en esta universidad")
+            return redirect(url_for('mostrar_talleres'))
+        else:
+            consulta = "update Taller set id_universidad=%s, nombre_taller=%s, tipo_taller=%s where id_talleres=%s;"
+            cur.execute(consulta, (id_universidad, nombreNuevo, tipoTaller, id_talleres))
 
-        return redirect(url_for('mostrar_universidades'))
 
 
 @app.route('/eliminarTaller/<string:id>', methods=['GET', 'POST'])

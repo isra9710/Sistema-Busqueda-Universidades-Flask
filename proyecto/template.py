@@ -185,14 +185,14 @@ def mostrar_universidades():
 
 
 @app.route('/mostrar_talleres')
-def mostar_talleres():
+def mostrar_talleres():
     consulta=("select * from Taller")
     cur.execute(consulta)
-    lista=cur.fetchall()
+    talleres=cur.fetchall()
     consulta = ("select * from Universidad;")
     cur.execute(consulta)
-    tupla = cur.fetchall()
-
+    universidades = cur.fetchall()
+    return render_template("admin/mostrar_talleres.html", talleres=talleres, universidades=universidades)
 
 @app.route('/universidades')
 def universidades():
@@ -235,14 +235,18 @@ def agregar():
     id_admin=None
     print(nombreAdmin)
     print(nombreUniversidad)
-    consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
-    cur.execute(consulta, nombreUniversidad)
-    lista=cur.fetchone()
-    print(lista)
-    if lista!=None:
-        for e in lista:
-            print(e)
-            nombreAux=e
+    if nombreAdmin is not None:
+        consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
+        cur.execute(consulta, nombreUniversidad)
+        lista=cur.fetchone()
+        print(lista)
+        if lista is not None:
+            for e in lista:
+                print(e)
+                nombreAux=e
+    else:
+        flash("Selecciona el nombre de un administrador, no se agrego la universidad")
+        return redirect(url_for('mostrar_universidades'))
     if nombreUniversidad==nombreAux:
         print("Esa universidad ya esta registrada")
         flash("Esa universidad ya existe!")
@@ -266,11 +270,13 @@ def agregar():
 def llenareditar(id):
     nombreAdmin=None
     id_administrador=None
+    nombreAnterior=None
     consulta="select * from Universidad where id_universidad=%s"
     cur.execute(consulta, (id))
     tupla=cur.fetchall()
     for e in tupla:
         id_administrador=e[1]
+        nombreAnterior=e[1]
     print(id_administrador)
     consulta = ("select nombre_admin from Administrador;")
     cur.execute(consulta)
@@ -282,46 +288,66 @@ def llenareditar(id):
     for e in tupla3:
         nombreAdmin=e
     print(nombreAdmin)
-    return render_template("admin/editar_uni.html", universidad=tupla, administradores=administradores, nombreAdmin=nombreAdmin)
+    return render_template("admin/editar_uni.html", universidad=tupla, administradores=administradores, nombreAdmin=nombreAdmin, nombreAnterior=nombreAnterior)
 
 
 @app.route('/editar', methods=['GET', 'POST'])#esta es en si la que hace el proceso logico de editar
 def editar():
     adminNombre = request.form.get("admin")
     nombre = request.form.get("nombreEditado")
+    nombreAnterior= request.form.get("universidadAnterior")
+    adminAnterior = request.form.get("adminAnterior")
+    id_uni = request.form.get("UniEditado")
+    print("Id_universidad:", id_uni)
     print("Admin nombre: ", adminNombre)
     print("NOMBRE UNI: ", nombre)
     id_administrador=None
+    id_administradorAnterior=None
     nombreAux=None
     contador=0
     consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
+    cur.execute(consulta, adminAnterior)
+    tuplaIdAnterior=cur.fetchone()
+    if tuplaIdAnterior is not None:
+        for e in tuplaIdAnterior:
+            id_administradorAnterior=e
+    consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
     cur.execute(consulta, (adminNombre))
-    id_administrador = cur.fetchone()
+    listaID= cur.fetchone()
+    if listaID is not None:
+        for e in listaID:
+            id_administrador=e
+    print("Id_administrador: ", id_administrador)
     consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
     cur.execute(consulta, (nombre))
     lista=cur.fetchone()
-    for e in lista:
-        nombreAux=e
+    if lista is not None:
+        for e in lista:
+            nombreAux=e
         print(nombreAux)
-    if (nombreAux==nombre):
-        consulta="update Universidad set id_administrador=%s, nombre_universidad=%s;"
-        cur.execute(consulta, (id_administrador, nombre))
+    if nombre==nombreAnterior:
+        print("El nombre nuevo y el anterior son el mismo")
+        consulta="update Universidad set id_administrador=%s, nombre_universidad=%s where id_universidad=%s;"
+        cur.execute(consulta, (id_administrador, nombre, id_uni))
         conexion.commit()
         flash("Universidad actualizada con exito")
         return redirect(url_for('mostrar_universidades'))
     elif(nombreAux==None):
-        consulta = "update Universidad set id_administrador=%s, nombre_universidad=%s;"
-        cur.execute(consulta, (nombre, id_administrador))
+        print("El nombre de la universidad es nuevo")
+        consulta = "update Universidad set id_administrador=%s, nombre_universidad=%s where id_universidad=%s;"
+        cur.execute(consulta, (id_administrador, nombre, id_uni))
         conexion.commit()
         flash("Universidad actualizada con exito")
         return redirect(url_for('mostrar_universidades'))
-
+    elif(id_administrador!=id_administradorAnterior):
+        consulta = "update Universidad set id_administrador=%s, nombre_universidad=%s where id_universidad=%s;"
+        cur.execute(consulta, (id_administrador, nombre, id_uni))
+        conexion.commit()
+        flash("Universidad actualizada con exito")
+        return redirect(url_for('mostrar_universidades'))
     else:
         flash("Esa universidad ya esta registrada")
         return redirect(url_for('mostrar_universidades'))
-
-
-
 
 
 @app.route('/eliminar/<string:id>', methods=['GET', 'POST'])
@@ -336,37 +362,123 @@ def eliminar(id):
 #Parte logia del CRUD de talleres
 @app.route('/agregarTaller', methods=['GET', 'POST'])
 def agregarTaller():
-    nombreAdmin = request.form.get("nombreAdmin")
-    nombreUniversidad = request.form.get("nombreNuevo")
+    nombreUniversidad = request.form.get("nombreUniversidad")
+    nombreTaller = request.form.get("nombreNuevo")
+    tipoTaller = request.form.get("tipoTaller")
     nombreAux=None
     id_admin=None
-    print(nombreAdmin)
+    print(nombreTaller)
     print(nombreUniversidad)
+    print(tipoTaller)
+    if nombreUniversidad is None:
+        flash("Debes seleccionar una universidad")
+        return redirect(url_for('mostrar_talleres'))
+    else:
+        consulta = ("select *from Universidad where nombre_universidad=%s;")
+        cur.execute(consulta, nombreUniversidad)
+        universidad=cur.fetchone()
+        print(universidad[0])
+        consulta = ("select * from Taller where id_universidad=%s AND nombre_taller=%s AND tipo_taller=%s ;")
+        cur.execute(consulta, (universidad[0], nombreTaller, tipoTaller))
+        comprobante=cur.fetchone()
+        print(comprobante)
+
+    if comprobante is None:
+        print("Entra al else")
+        consulta = ("insert into Taller (id_universidad, nombre_taller, tipo_taller) values(%s, %s, %s);")
+        cur.execute(consulta, (universidad[0], nombreTaller, tipoTaller))
+        flash("Taller registrado con exito")
+        return redirect(url_for('mostrar_talleres'))
+    else:
+        print("Entra al else")
+        flash("Ese taller ya existe en la universidad")
+        return redirect(url_for('mostrar_talleres'))
+
+
+@app.route('/llenareditarTaller/<string:id>', methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos de "mostrar universiadades"
+def llenareditarTaller(id):
+    nombreAdmin=None
+    id_administrador=None
+    nombreAnterior=None
+    consulta="select * from Taller where id_talleres=%s"
+    cur.execute(consulta, (id))
+    tupla=cur.fetchall()
+    for e in tupla:
+        id_universidad=e[1]
+        nombreAnterior=e[1]
+    print(id_administrador)
+    consulta = ("select nombre_admin from Administrador;")
+    cur.execute(consulta)
+    tupla2 = cur.fetchall()
+    administradores = list(sum(tupla2, ()))
+    consulta = ("select nombre_admin from Administrador where id_administrador=%s;")
+    cur.execute(consulta, id_administrador)
+    tupla3=cur.fetchone()
+    for e in tupla3:
+        nombreAdmin=e
+    print(nombreAdmin)
+    return render_template("admin/editar_uni.html", universidad=tupla, administradores=administradores, nombreAdmin=nombreAdmin, nombreAnterior=nombreAnterior)
+
+
+
+
+
+@app.route('/editarTaller', methods=['GET', 'POST'])#esta es en si la que hace el proceso logico de editar
+def editarTaller():
+    adminNombre = request.form.get("admin")
+    nombre = request.form.get("nombreEditado")
+    nombreAnterior= request.form.get("universidadAnterior")
+    adminAnterior = request.form.get("adminAnterior")
+    id_uni = request.form.get("UniEditado")
+    print("Id_universidad:", id_uni)
+    print("Admin nombre: ", adminNombre)
+    print("NOMBRE UNI: ", nombre)
+    id_administrador=None
+    id_administradorAnterior=None
+    nombreAux=None
+    contador=0
+    consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
+    cur.execute(consulta, adminAnterior)
+    tuplaIdAnterior=cur.fetchone()
+    if tuplaIdAnterior is not None:
+        for e in tuplaIdAnterior:
+            id_administradorAnterior=e
+    consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
+    cur.execute(consulta, (adminNombre))
+    listaID= cur.fetchone()
+    if listaID is not None:
+        for e in listaID:
+            id_administrador=e
+    print("Id_administrador: ", id_administrador)
     consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
-    cur.execute(consulta, nombreUniversidad)
+    cur.execute(consulta, (nombre))
     lista=cur.fetchone()
-    print(lista)
-    if lista!=None:
+    if lista is not None:
         for e in lista:
-            print(e)
             nombreAux=e
-    if nombreUniversidad==nombreAux:
-        print("Esa universidad ya esta registrada")
-        flash("Esa universidad ya existe!")
+        print(nombreAux)
+    if nombre==nombreAnterior:
+        print("El nombre nuevo y el anterior son el mismo")
+        consulta="update Universidad set id_administrador=%s, nombre_universidad=%s where id_universidad=%s;"
+        cur.execute(consulta, (id_administrador, nombre, id_uni))
+        conexion.commit()
+        flash("Universidad actualizada con exito")
+        return redirect(url_for('mostrar_universidades'))
+    elif(nombreAux==None):
+        print("El nombre de la universidad es nuevo")
+        consulta = "update Universidad set id_administrador=%s, nombre_universidad=%s where id_universidad=%s;"
+        cur.execute(consulta, (id_administrador, nombre, id_uni))
+        conexion.commit()
+        flash("Universidad actualizada con exito")
+        return redirect(url_for('mostrar_universidades'))
+    elif(id_administrador!=id_administradorAnterior):
+        consulta = "update Universidad set id_administrador=%s, nombre_universidad=%s where id_universidad=%s;"
+        cur.execute(consulta, (id_administrador, nombre, id_uni))
+        conexion.commit()
+        flash("Universidad actualizada con exito")
         return redirect(url_for('mostrar_universidades'))
     else:
-        print("Estas procediendo a registrarla")
-        consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
-        cur.execute(consulta, nombreAdmin)
-        lista = cur.fetchall()
-        print(lista)
-        for e in lista:
-            id_admin = e
-            print(e)
-        consulta = ("insert into Universidad (id_administrador, nombre_universidad, promedio) values(%s, %s, %s);")
-        cur.execute(consulta, (id_admin, nombreUniversidad, 0.0))
-        conexion.commit()
-        flash("Se agrego universidad con exito")
+        flash("Esa universidad ya esta registrada")
         return redirect(url_for('mostrar_universidades'))
 
 

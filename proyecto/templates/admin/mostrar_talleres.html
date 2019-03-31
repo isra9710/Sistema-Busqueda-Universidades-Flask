@@ -278,7 +278,7 @@ $(document).ready(function(){
 					</li>
 					</div>
 					<div class="col-sm-6">
-						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir universidad</span></a>
+						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir taller</span></a>
 					</div>
                 </div>
             </div>
@@ -336,7 +336,7 @@ $(document).ready(function(){
 							<select name="nombreUniversidad">
                         <option value="novalido" selected disabled hidden>Selecciona una universidad</option>
                         {% for universidad in universidades %}
-                            <option>{{ universidad }}</option>
+                            <option>{{ universidad[2] }}</option>
                         {% endfor %}
                     </select>
 						</div>

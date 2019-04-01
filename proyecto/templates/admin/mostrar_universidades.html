@@ -296,10 +296,7 @@ $(document).ready(function(){
 
 
 			</ul>
-			<form class="form-inline my-2 my-lg-0 ">
-			      <input class="form-control mr-sm-2" type="search" placeholder="Universidad">
-			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-			    </form>
+
 		</nav>
 
 		</div>
@@ -391,6 +388,7 @@ $(document).ready(function(){
                         <th>ID Administrador</th>
 						            <th>Universidad</th>
                         <th>Promedio</th>
+						<th>Pagina web</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -406,6 +404,7 @@ $(document).ready(function(){
                         <td>{{ universidad[1] }}</td>
 						<td>{{ universidad[2] }}</td>
                         <td>{{ universidad[3] }}</td>
+						<td>{{ universidad[4] }}</td>
                         <td>
                             <a href="/llenareditar/{{ universidad[0] }}" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                             <a href="/eliminar/{{ universidad[0] }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -439,6 +438,10 @@ $(document).ready(function(){
 						<div class="form-group">
 							<label>Nombre Universidad</label>
 							<textarea class="form-control" name="nombreNuevo" required></textarea>
+						</div>
+						<div class="form-group">
+							<label>Pagina Universidad</label>
+							<textarea class="form-control" name="paginaUniversidad" required></textarea>
 						</div>
 						<div class="form-group">
 							<label>Imagen Universidad</label>

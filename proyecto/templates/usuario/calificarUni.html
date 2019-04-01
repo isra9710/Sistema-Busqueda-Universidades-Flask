@@ -62,33 +62,30 @@
 				<ul class="navbar-nav">
 					<li class="nav-item">
 					<!-- link -->
-						<a class="nav-link" href="/"> Home</a>
+						<a class="nav-link" href="/homeUsuario"> Home</a>
 					</li>
 					<li class="nav-item">
 					<!-- link -->
-						<a class="nav-link" href="/universidades"> Universidades</a>
+						<a class="nav-link" href="/uniUsuario"> Universidades</a>
 					</li>
 					<li class="nav-item">
 					<!-- link -->
-						<a class="nav-link" href="/top10"> Top 10</a>
+						<a class="nav-link" href="/top10Usuario"> Top 10</a>
+					</li>
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link" href="/verificarCalificar"> Calificar Universidad</a>
 					</li>
 
-
-					<div class="btn-group " role="group">
-				    <button id="btnGroupDrop1" type="button" class=" btn nav-link nav-item  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				      Iniciar Sesion / Registrarse
-				    </button>
-				    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-				      <a class="dropdown-item" href="/registroLogin ">Usuario </a>
-				      <a class="dropdown-item" href="/loginAdmin">Administrador</a>
-				    </div>
-				  </div>
+					<li class="nav-item">
+						<a class="nav-link " href="/cerrarSesionUsuario"><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
+					</li>
 
 				</ul>
 
 			</div>
 			</nav>
-		</div>
+
 	</header>
 
 
@@ -96,97 +93,86 @@
 
 
 <body>
+<form action="/calificar" method="POST">
 	<!-- Edit Modal HTML -->
 
+    <h1>{{usuario}}</h1>
+
+    <div class="container">
+
+    {%for universidad in universidades %}
+        <div class="main row">
 
 
-<div class="container">
+                <div class="col-md-7">
+                  <a href="#">
+                      <img class="img-fluid rounded mb-3 mb-md-0" src="{{ url_for('static', filename=universidad[5]) }}" alt=""/>
+                  </a>
+                </div>
+                <div class="form-group row">
 
-{%for universidad in universidades %}
-	<div class="main row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Nombre:</label>
+
+                    <div class="col-sm-10">
+
+                      <input type="text" readonly value="{{universidad[2]}}" class="form-control" name="nombre" required >
+
+                    </div>
+        </div>
+        <hr>
+        <div class=" row">
+
+                <div class="col-md-7">
 
 
-	        <div class="col-md-7">
-	          <a href="#">
-				  <img class="img-fluid rounded mb-3 mb-md-0" src="{{ url_for('static', filename=universidad[5]) }}" alt=""/>
-	          </a>
-	        </div>
+                <div class="form-group row">
 
-	        <div class="col-md-5">
-				<h3>{{universidad[2]}}</h3>
-	        </div>
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Puntuación:</label>
+
+                    <div class="col-sm-10">
+
+                      <input type="text" readonly value="{{universidad[3]}}" class="form-control" name="puntuacion" required >
+
+                    </div>
+                </div>
 
 
+
+                    <div class="form-group row form-inline">
+                    <label for="inlineFormCustomSelectPref" class="col-sm-2 col-form-label">Talleres:</label>
+
+                        <select name="talleres">
+
+                    <option selected>Choose...</option>
+                                {%for taller in talleres%}
+                        <option >{{taller[2]}}</option>
+                            {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                {%for comentario in comentarios%}
+                    <textarea name="" readonly rows="10" cols="40">{{comentario[4]}}</textarea>
+                    <br>
+                {%endfor%}
+        </div>
+        </div>
     </div>
-	<hr>
-    <div class=" row">
+        {%endfor%}
+    <div class="form-group row form-inline">
+                    <label for="inlineFormCustomSelectPref" class="col-sm-2 col-form-label">Tu calificacion:</label>
 
-            <div class="col-md-7">
-
-
-			<div class="form-group row">
-
-			    <label for="inputPassword" class="col-sm-2 col-form-label">Puntuación:</label>
-
-				<!-- ESTO SE DESCOMENTA CUANDO ES UN USUARIO REGISTRADO Y SE COMENTA LA LINEA DE ARRIBA-->
-				<!--
-				<form>
-				  <p class="clasificacion">
-					<input id="radio1" type="radio" name="estrellas" value="5">
-					  <label for="radio1">★</label>
-					<input id="radio2" type="radio" name="estrellas" value="4">
-					<label for="radio2">★</label>
-					<input id="radio3" type="radio" name="estrellas" value="3">
-					<label for="radio3">★</label>
-					<input id="radio4" type="radio" name="estrellas" value="2">
-					<label for="radio4">★</label><
-					<input id="radio5" type="radio" name="estrellas" value="1">
-					<label for="radio5">★</label>
-				  </p>
-				</form>
-				-->
-
-			    <div class="col-sm-10">
-
-			      <input type="text" readonly value="{{universidad[3]}}" class="form-control" name="idTaller" required >
-
-			    </div>
-			</div>
-
-
-
-				<div class="form-group row form-inline">
-			    <label for="inlineFormCustomSelectPref" class="col-sm-2 col-form-label">Universidad:</label>
-
-					<select name="nombreUni">
-
-				<option selected>Choose...</option>
-                            {%for taller in talleres%}
-					<option >{{taller[2]}}</option>
-                        {% endfor %}
-				</select>
-			  </div>
-	        </div>
-	</div>
-	</div>
-</div>
-	{%endfor%}
+                       <input type="number" required name="nueva_puntuacion" min="0" max="10" value="0">
+                  </div>
+    <label>Tu comentario:</label>
+    <textarea name="comentarios" rows="10" cols="40"></textarea>
+    <input type="submit" class="btn btn-success" value="Calificar">
+    </form>
     </div>
 
       <!-- /.row -->
-
-
-
 
    </div>
       <!-- /.row -->
-
-
-
-
-
-
-
 
 	<div class="container">
 	<footer class="bg-black small text-center text-white-50">
@@ -197,14 +183,9 @@
 
 	</div>
 
-
-
-
-
 <!-- JAVASCRIP--->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 
 </html>
-

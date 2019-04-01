@@ -8,7 +8,7 @@ app.secret_key = "123"
 conexion = pymysql.connect("localhost", "root", "", "base")
 cur = conexion.cursor()
 nombreUniversidad=None
-
+Usuario=None
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
@@ -18,26 +18,36 @@ def hello():
 @app.route('/buscar_universidad', methods=['GET', 'POST'])
 def buscarUniversidad():
     nombreUniversidad=request.form.get("nombreUniversidad")
-    nombre=None
-    promedio=None
-    consulta="select *from Universidad where nombre_universidad=%s"
-    cur.execute(consulta, nombreUniversidad)
-    tupla=cur.fetchone()
-    if tupla is None:
-        flash("No hay ninguna universidad con ese nombre")
-        return redirect(url_for('hello'))
+    print(nombreUniversidad)
+    if nombreUniversidad is None:
+        flash("No has ingresado un nombre para busar")
+        return render_template('Index.html')
     else:
-        consulta = "select nombre_universidad from Universidad where nombre_universidad=%s"
+        nombre = None
+        promedio = None
+        id_universidad=None
+        consulta = "select *from Universidad where nombre_universidad=%s"
         cur.execute(consulta, nombreUniversidad)
-        lista=cur.fetchone()
-        for e in lista:
-            nombre=e
-        consulta = "select promedio from Universidad where nombre_universidad=%s"
-        cur.execute(consulta, nombreUniversidad)
-        lista=cur.fetchone()
-        for e in lista:
-            promedio=e
-        return render_template('busquedaUniversidad.html', nombre=nombre, promedio=promedio)
+        universidades = cur.fetchall()
+        if universidades is None:
+            flash("No hay ninguna universidad con ese nombre")
+            return redirect(url_for('hello'))
+        else:
+            consulta = "select nombre_universidad from Universidad where nombre_universidad=%s;"
+            cur.execute(consulta, nombreUniversidad)
+            lista=cur.fetchone()
+            for e in lista:
+                nombre=e
+
+            consulta="select id_universidad from Universidad where nombre_universidad=%s;"
+            cur.execute(consulta, nombre)
+            tupla=cur.fetchall()
+            for e in tupla:
+                id_universidad=e
+            consulta="select*from Taller where id_universidad=%s;"
+            cur.execute(consulta, id_universidad)
+            talleres=cur.fetchall()
+            return render_template('busquedaUniversidad.html', universidades=universidades, talleres=talleres)
 
 
 @app.route('/buscar_universidades', methods=['GET', 'POST'])
@@ -64,21 +74,30 @@ def buscarUniversidades():
                 promedio1=e
             for e in tupla2:
                 promedio2=e
+
             print(promedio1)
             print(promedio2)
             return render_template('Index.html', universidad1=universidad1, universidad2=universidad2, promedio1=promedio1, promedio2=promedio2)
     else:
+        flash("Debes ingresar nombres para buscar")
         return redirect((url_for('hello')))
 
 
 @app.route('/universidades')
 def universidades():
-    return render_template('Universidades.html')
+    consulta="select *from Universidad;"
+    cur.execute(consulta)
+    universidades=cur.fetchall()
+    return render_template('Universidades.html', universidades=universidades)
 
 
 @app.route('/top10')
 def top10():
-    return render_template('Top10.html')
+    consulta= "select *from Universidad ORDER BY promedio DESC LIMIT 10 ;"
+    cur.execute(consulta)
+    universidades=cur.fetchall()
+    return render_template('Top10.html', universidades=universidades)
+
 
 
 #######################Fin de funciones que puede hacer cualquiera sin iniciar sesion##############################
@@ -144,7 +163,10 @@ def home():
 @app.route('/universidades_admin')
 def universidades_admin():
     if "username" in session:
-        return render_template('admin/Universidades_admin.html')
+        consulta = "select *from Universidad;"
+        cur.execute(consulta)
+        universidades = cur.fetchall()
+        return render_template('admin/Universidades_admin.html', universidades=universidades)
     else:
         flash("Debes inciar sesion primero")
         return redirect(url_for('loginAdmin'))
@@ -152,8 +174,11 @@ def universidades_admin():
 
 @app.route('/crud_universidades')
 def crud_universidades():
-    return render_template('admin/Crud_Universidades.html')
-
+    if "username" in session:
+        return render_template('admin/Crud_Universidades.html')
+    else:
+        flash("Primero inicia sesion")
+        return redirect(url_for(loginAdmin))
 
 @app.route('/mostrar_universidades')
 def mostrar_universidades():
@@ -193,7 +218,14 @@ def mostrar_talleres():
 
 @app.route('/top10_admin')
 def top10_admin():
-    return render_template('admin/Top10_admin.html')
+    if "username" in session:
+        consulta = "select *from Universidad ORDER BY promedio DESC LIMIT 10 ;"
+        cur.execute(consulta)
+        universidades = cur.fetchall()
+        return render_template('admin/Top10_admin.html', universidades=universidades)
+    else:
+        flash("Primero inicia sesion")
+        return redirect(url_for(loginAdmin))
 
 
 
@@ -205,9 +237,10 @@ def agregar():
         if request.method == "POST":
             nombreAdmin = request.form.get("nombreAdmin")
             nombreUniversidad = request.form.get("nombreNuevo")
-            f = request.files("file")
+            pagina = request.form.get("paginaUniversidad")
+            f = request.files['file']
             folder = os.path.realpath(__file__).replace('\\', '/').split('/')[0:-1]
-            f.save('/'.join(folder)+'/static/uploads/'+f.filename)
+            f.save('/'.join(folder)+'/static/'+f.filename)
             nombreAux=None
             id_admin=None
             print(f.filename)
@@ -238,8 +271,8 @@ def agregar():
                 for e in lista:
                     id_admin = e
                     print(e)
-                consulta = ("insert into Universidad (id_administrador, nombre_universidad, promedio) values(%s, %s, %s);")
-                cur.execute(consulta, (id_admin, nombreUniversidad, 0.0))
+                consulta = ("insert into Universidad (id_administrador, nombre_universidad, promedio, paginaWeb, foto) values(%s, %s, %s, %s, %s);")
+                cur.execute(consulta, (id_admin, nombreUniversidad, 0.0, pagina, f.filename))
                 conexion.commit()
                 flash("Se agrego universidad con exito")
                 return redirect(url_for('mostrar_universidades'))
@@ -567,8 +600,8 @@ def registrado():
         print(id_universidad)
         if request.method =="POST":
             if nombreAux != nombre:
-                    consulta = ("insert into Usuario (id_universidad, nombre_usuario, contra_usuario) values(%s, %s, %s);")
-                    cur.execute(consulta, (id_universidad, nombre, contra))
+                    consulta = ("insert into Usuario (id_universidad, nombre_usuario, contra_usuario, calificar) values(%s, %s, %s, %s);")
+                    cur.execute(consulta, (id_universidad, nombre, contra, 0))
                     conexion.commit()
                     print("terminado")
                     session["usernameUser"] = nombre
@@ -585,7 +618,7 @@ def registrado():
 
 @app.route('/iniciandoSesion', methods=['GET', 'POST'])
 def sesionIniciada():
-
+        global Usuario
         nombre = request.form.get("nombreInicio")
         contra = request.form.get("contraInicio")
         nombreAux=None
@@ -615,6 +648,7 @@ def sesionIniciada():
         print(nombreAux)
         print(contraAux)
         if nombre == nombreAux and contra == contraAux:
+            Usuario=nombre
             session["usernameUser"] = nombre
             return redirect(url_for('homeUsuario'))
         else:
@@ -634,7 +668,10 @@ def homeUsuario():
 @app.route('/top10Usuario')
 def top10Usuario():
     if "usernameUser" in session:
-        return render_template('usuario/Top10.html')
+        consulta = "select *from Universidad ORDER BY promedio DESC LIMIT 10 ;"
+        cur.execute(consulta)
+        universidades = cur.fetchall()
+        return render_template('usuario/Top10.html', universidades=universidades)
     else:
         flash("Debes iniciar sesion primero")
         redirect(url_for('registroLogin'))
@@ -643,10 +680,85 @@ def top10Usuario():
 @app.route('/uniUsuario')
 def uniUsuario():
     if "usernameUser" in session:
-        return render_template('usuario/Universidades.html')
+        consulta = "select *from Universidad;"
+        cur.execute(consulta)
+        universidades = cur.fetchall()
+        return render_template('usuario/Universidades.html', universidades=universidades)
+    else:
+        flash("Primero debes iniciar sesion")
+        return redirect(url_for('registroLogin'))
+
+
+@app.route('/verificarCalificar')
+def verificarCalificar():
+
+    if "usernameUser" in session:
+        print(Usuario)
+        calificacion=0
+        consulta="select *from Usuario where nombre_usuario=%s;"
+        cur.execute(consulta, Usuario)
+        user=cur.fetchall()
+        for atributo in user:
+            if atributo[4] == 1:
+                flash("Ya has dado una calificacion, no seas tramposo")
+                redirect(url_for('homeUsuario'))
+            else:
+                consulta="select * from Universidad where id_universidad=%s;"
+                cur.execute(consulta, atributo[1])
+                universidad=cur.fetchall()
+                consulta="select *from Calificacion"
+                cur.execute(consulta)
+                comentarios=cur.fetchall()
+                return render_template('usuario/calificarUni.html', universidades=universidad, comentarios=comentarios)
     else:
         flash("Primero debes iniciar sesion")
         redirect(url_for('registroLogin'))
+
+
+@app.route('/calificar', methods=['GET', 'POST'])
+def calificar():
+    if "usernameUser" in session:
+        nombreUniversidad=request.form.get("nombre")
+        promedioAnterior=request.form.get("puntuacion")
+        puntuacion=request.form.get("nueva_puntuacion")
+        comentarios=request.form.get("comentarios")
+        promedio=None
+        id_usuario=None
+        id_universidad=None
+        consulta="select*from Usuario where nombre_usuario=%s;"
+        cur.execute(consulta, Usuario)
+        user=cur.fetchall()
+        for atributo in  user:
+            id_usuario=atributo[0]
+
+        consulta="select *from Universidad where nombre_universidad=%s;"
+        cur.execute(consulta, nombreUniversidad)
+        universidad=cur.fetchall()
+        for e in universidad:
+            id_universidad=e[0]
+        consulta="insert into Calificacion(id_usuario, id_universidad, calificacion, comentarios) values(%s, %s, %s, %s)"
+        cur.execute(consulta, (id_usuario, id_universidad, puntuacion, comentarios))
+        conexion.commit()
+        consulta="select AVG(calificacion) from Calificacion;"
+        cur.execute(consulta)
+        tupla =cur.fetchall()
+        for e in tupla:
+            promedio=e
+
+        print(promedio)
+        consulta="update Universidad set promedio=%s where id_universidad=%s;"
+        cur.execute(consulta, (promedio, id_universidad))
+        conexion.commit()
+        consulta="update Usuario set calificar=%s where id_usuario=%s;"
+        cur.execute(consulta, (1, id_usuario))
+        flash("Tu calificacion se guardo")
+        return redirect(url_for('homeUsuario'))
+    else:
+        flash("Primero debes iniciar sesion")
+        redirect(url_for('registroLogin'))
+
+
+
 
 
 @app.route('/cerrarSesionUsuario')

@@ -38,9 +38,9 @@
 					
 					
 			</ul>
-			<form class="form-inline my-2 my-lg-0 ">
-			      <input class="form-control mr-sm-2" type="search" placeholder="Universidad">
-			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+			<form class="form-inline my-2 my-lg-0 " method="POST" action="/buscar_universidad">
+			      <input class="form-control mr-sm-2" type="text" placeholder="Universidad" name="nombreUniversidad">
+			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
 			    </form>
 		</nav>
 
@@ -81,7 +81,8 @@
 				    </button>
 				    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 				      <a class="dropdown-item" href="/registroLogin ">Usuario </a>
-				      <a class="dropdown-item" href="/registroAdmin">Administrador</a>
+
+						<a class="dropdown-item" href="/loginAdmin">Administrador</a>
 				    </div>
 				  </div>
 					

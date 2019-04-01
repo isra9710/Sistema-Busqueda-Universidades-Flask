@@ -5,12 +5,29 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!---->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!---->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+
 <style type="text/css">
     body {
         color: #566787;
@@ -257,7 +274,85 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+
 </head>
+
+<header>
+	<!---------------------------------BARRA1---------------------------------------->
+		<div class="container ">
+
+			<nav class="barra1 navbar navbar-expand-sm navbar-ligth bg-ligth row">
+			<ul class="navbar-nav col-md-8">
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link navbar-brand" href="/"> <img src="{{url_for('static', filename='css/Media/logo.png')}}" border='0'/></a>
+					</li>
+
+
+			</ul>
+			<form class="form-inline my-2 my-lg-0 ">
+			      <input class="form-control mr-sm-2" type="search" placeholder="Universidad">
+			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+			    </form>
+		</nav>
+
+		</div>
+
+		<!---------------------------------BARRA2---------------------------------------->
+		<!-- La etiqueta <nav> define un conjunto de enlaces de navegación. -->
+		<!-- barra de navegacion que se colapse en md -->
+			<div class="container">
+			<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+
+			<!-- Creamos el boton que parece cuando colapsa -->
+			<button class="navbar-toggler" data-toggle="collapse" data-target="#colapsar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+		<!-- agregamos los links al boton que colapsa -->
+			<div class="collapse navbar-collapse" id="colapsar">
+
+				<!-- La etiqueta <li> se usa en listas ordenadas ( <ol> ), listas desordenadas ( <ul> ) y en listas de menú -->
+				<ul class="navbar-nav">
+
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link" href="/home"> Home</a>
+					</li>
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link" href="/universidades_admin"> Universidades</a>
+					</li>
+
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link" href="/top10_admin"> Top 10</a>
+					</li>
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link" href="/mostrar_universidades"> CRUD universidades</a>
+					</li>
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link" href="/mostrar_talleres"> CRUD talleres</a>
+					</li>
+
+					<li class="nav-item">
+						<a class="nav-link " href="/cerrarSesionAdmin"><span class="glyphicon  glyphicon-user"></span> Cerrar Sesion </a>
+					</li>
+
+				</ul>
+
+			</div>
+			</nav>
+		</div>
+</header>
+
+
+
+
 <body>
 {% with messages= get_flashed_messages() %}
 	{% if messages %}
@@ -272,10 +367,7 @@ $(document).ready(function(){
                 <div class="row">
                     <div class="col-sm-6">
 						<h2>Gestor <b>Talleres</b></h2><br>
-						<li>
-					<!-- link -->
-						<a class="nav-link" href="/home"> Home</a>
-					</li>
+
 					</div>
 					<div class="col-sm-6">
 						<a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Añadir taller</span></a>

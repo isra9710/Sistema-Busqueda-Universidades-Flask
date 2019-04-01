@@ -1,60 +1,132 @@
-<!-- Edit Modal HTML -->
-{% with messages= get_flashed_messages() %}
-	{% if messages %}
-		{% for meessage in messages %}
-			<h1>{{ meessage }}</h1>
-		{% endfor %}
-	{% endif %}
-{% endwith %}
-	<div id="editEmployeeModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form method="POST" action="{{url_for('editar')}}" >
+<!DOCTYPE html>
+<html lang="en">
 
-					{% for e in universidad %}
-                    <div class="modal-body">
-						<div class="form-group">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
 
-                            <label>ID Universidad</label>
-							<input type="text" readonly value={{e[0]}} class="form-control" name="UniEditado" required>
-						</div>
-						<div class="form-group">
-                            <div class="form-group">
+	
 
-                            <label>Administrador anterior: </label>
-							<input type="text" readonly value={{nombreAdmin}} class="form-control" name="adminAnterior" required>
-						</div>
-						<div class="form-group">
-							<label>ID Administrador</label>
-                            <select name="admin">
+	<!--  -->
+	<!-- JQUERY--->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<!-- CSS de boostrap--->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-                        {% for administrador in administradores %}
-                            <option>{{ administrador }}</option>
-                        {% endfor %}
-                    </select>
-							<div class="form-group">
-                            <div class="form-group">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}" />
 
-                            <label>Nombre Universidad Anterior: </label>
-							<input type="text" readonly value={{nombreAnterior}} class="form-control" name="universidadAnterior" required>
-						</div>
-						</div>
-						<div class="form-group">
-							<label>Universidad</label>
-							<input type="text" class="form-control" name="nombreEditado" value={{e[2]}} required>
-						</div>
-					</div>
-                    {% endfor %}
-					<div class="modal-footer">
-						 <li>
+	
+</head>
+
+<header>
+	<!---------------------------------BARRA1---------------------------------------->
+		<div class="container ">
+
+			<nav class="barra1 navbar navbar-expand-sm navbar-ligth bg-ligth row">
+			<ul class="navbar-nav col-md-8">
+					<li class="nav-item">
 					<!-- link -->
-						<a class="nav-link" href="/mostrar_universidades"> Cancelar</a>
+						<a class="nav-link navbar-brand" href="/"> <img src="{{url_for('static', filename='css/Media/logo.png')}}" border='0'/></a>
 					</li>
-						<input type="submit"  value="Guardar">
-					</div>
-
-			</div>
 
 
-	    </div>
-    </div>
+			</ul>
+			<form class="form-inline my-2 my-lg-0 ">
+
+			    </form>
+		</nav>
+
+		</div>
+</header>
+
+
+
+
+<body>
+	<!-- Edit Modal HTML -->
+	<div class="container">
+		<form method="POST" action="{{url_for('editar')}}" >
+
+			
+			 {% for e in universidad %}
+			  <div class="form-group row">
+			    <label for="inputPassword" class="col-sm-2 col-form-label">ID Universida:</label>
+			    <div class="col-sm-10">
+
+			      <input type="text" readonly value={{e[0]}} class="form-control" name="UniEditado" required >
+			    
+			    </div>
+			  </div>
+
+			  <div class="form-group row">
+			    <label for="inputPassword" class="col-sm-2 col-form-label">Administrador anterior:</label>
+			    <div class="col-sm-10">
+
+			      <input type="text" readonly value={{nombreAdmin}} class="form-control" name="adminAnterior" required >
+
+			    </div>
+			  </div>
+			
+			<div class="form-group row form-inline">
+			    <label for="inlineFormCustomSelectPref" class="col-sm-2 col-form-label">ID Administrador:</label>
+			    
+					<select name="admin">
+				<!--
+					<select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelect">
+			        <option selected>Choose...</option>
+			        <option value="1">One</option>
+			        <option value="2">Two</option>
+			        <option value="3">Three</option>
+			      </select>
+				-->
+			  </div>
+
+								{% for administrador in administradores %}
+			                            <option>{{ administrador }}</option>
+			                       {% endfor %}
+				</select>
+										<div class="form-group">
+			                            <div class="form-group">
+				                            <label>Nombre Universidad Anterior: </label>
+											<input type="text" readonly value={{nombreAnterior}} class="form-control" name="universidadAnterior" required>
+										</div>
+										</div>
+
+										<div class="form-group">
+											<label>Universidad</label>
+											<input type="text" class="form-control" name="nombreEditado" value={{e[2]}} required>
+										</div>
+							</div>
+			                    {% endfor %}
+
+
+			<!--
+			<div class="form-group row">
+			    <label for="inputPassword" class="col-sm-2 col-form-label">Nombre Universidad Anterior:</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="inputPassword" placeholder="uni anterior">
+			    </div>
+			 </div>
+
+			  <div class="form-group row">
+			    <label for="inputPassword" class="col-sm-2 col-form-label"> Universidad :</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" id="inputPassword" placeholder="uni ">
+			    </div>
+
+			 </div>
+			-->
+			 
+									<div class="modal-footer">
+										<a class="btn btn-primary" href="/mostrar_universidades" role="button">Cancelar</a>
+										<input class="btn btn-success" type="submit" value="Guardar">
+
+								</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

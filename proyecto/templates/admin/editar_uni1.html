@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap CRUD Data Table for Database with Modal Form</title>
+
+
+</head>
+
+<header>
+		<!---------------------------------BARRA1---------------------------------------->
+		<div class="container ">
+
+			<nav class="barra1 navbar navbar-expand-sm navbar-ligth bg-ligth row">
+			<ul class="navbar-nav col-md-8">
+					<li class="nav-item">
+					<!-- link -->
+						<a class="nav-link navbar-brand" href="/"> <img src="{{url_for('static', filename='css/Media/logo.png')}}" border='0'/></a>
+					</li>
+
+
+			</ul>
+
+		</nav>
+
+		</div>
+
+
+	</header>
+
+
+
+<body>
+
+
+<body>
+	<!-- Edit Modal HTML -->
+{% with messages= get_flashed_messages() %}
+	{% if messages %}
+		{% for meessage in messages %}
+			<h1>{{ meessage }}</h1>
+		{% endfor %}
+	{% endif %}
+{% endwith %}
+
+
+	<div id="editEmployeeModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<form method="POST" action="{{url_for('editar')}}" >
+
+						{% for e in universidad %}
+	                    <div class="modal-body">
+
+									<div class="form-group">
+
+			                            <label>ID Universidad</label>
+										<input type="text" readonly value={{e[0]}} class="form-control" name="UniEditado" required>
+									</div>
+
+			                        <div class="form-group">
+			                            <label>Administrador anterior: </label>
+										<input type="text" readonly value={{nombreAdmin}} class="form-control" name="adminAnterior" required>
+									</div>
+
+									<div class="form-group">
+										<label>ID Administrador</label>
+			                        	<select name="admin">
+									</div>
+
+
+			                        {% for administrador in administradores %}
+			                            <option>{{ administrador }}</option>
+			                        {% endfor %}
+
+
+			                    	</select>
+										<div class="form-group">
+			                            <div class="form-group">
+				                            <label>Nombre Universidad Anterior: </label>
+											<input type="text" readonly value={{nombreAnterior}} class="form-control" name="universidadAnterior" required>
+										</div>
+										</div>
+
+										<div class="form-group">
+											<label>Universidad</label>
+											<input type="text" class="form-control" name="nombreEditado" value={{e[2]}} required>
+										</div>
+							</div>
+			                    {% endfor %}
+
+
+
+								<div class="modal-footer">
+									<li>
+									<!-- link -->
+										<a class="nav-link" href="/mostrar_universidades"> Cancelar</a>
+									</li>
+									<input type="submit"  value="Guardar">
+								</div>
+
+			   </form>
+			</div>
+	    </div>
+    </div>
+
+
+</body>
+</body>
+</html>

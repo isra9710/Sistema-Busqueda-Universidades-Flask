@@ -38,9 +38,9 @@
 					
 					
 			</ul>
-			<form class="form-inline my-2 my-lg-0 ">
-			      <input class="form-control mr-sm-2" type="search" placeholder="Universidad">
-			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+			<form class="form-inline my-2 my-lg-0 " method="POST" action="/buscar_universidad">
+			      <input class="form-control mr-sm-2" type="text" placeholder="Universidad" name="nombreUniversidad">
+			      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Buscar</button>
 			    </form>
 		</nav>
 
@@ -81,10 +81,7 @@
 					<!-- link -->
 						<a class="nav-link" href="/mostrar_universidades"> CRUD universidades</a>
 					</li>
-					<li class="nav-item">
-					<!-- link -->
-						<a class="nav-link" href="/crud_top10"> CRUD Top 10</a>
-					</li>
+
 					
 				</ul>
 

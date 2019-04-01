@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
-import pymysql
+import pymysql #el conector de la base de datos
+import os #para manejar archivos
+import pytesseract
+import image
 app = Flask(__name__)
 app.secret_key = "123"
 conexion = pymysql.connect("localhost", "root", "", "base")
@@ -135,7 +138,7 @@ def home():
         return render_template('admin/home.html')
     else:
         flash("Primero debes iniciar sesion")
-        redirect(url_for('loginAdmin'))
+        return redirect(url_for('loginAdmin'))
 
 
 @app.route('/universidades_admin')
@@ -199,45 +202,52 @@ def top10_admin():
 @app.route('/agregar', methods=['GET', 'POST'])
 def agregar():
     if "username" in session:
-        nombreAdmin = request.form.get("nombreAdmin")
-        nombreUniversidad = request.form.get("nombreNuevo")
-        nombreAux=None
-        id_admin=None
-        print(nombreAdmin)
-        print(nombreUniversidad)
-        if nombreAdmin is not None:
-            consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
-            cur.execute(consulta, nombreUniversidad)
-            lista=cur.fetchone()
-            print(lista)
-            if lista is not None:
+        if request.method == "POST":
+            nombreAdmin = request.form.get("nombreAdmin")
+            nombreUniversidad = request.form.get("nombreNuevo")
+            f = request.files("file")
+            folder = os.path.realpath(__file__).replace('\\', '/').split('/')[0:-1]
+            f.save('/'.join(folder)+'/static/uploads/'+f.filename)
+            nombreAux=None
+            id_admin=None
+            print(f.filename)
+            print(nombreAdmin)
+            print(nombreUniversidad)
+            if nombreAdmin is not None:
+                consulta = ("select nombre_universidad from Universidad where nombre_universidad=%s;")
+                cur.execute(consulta, nombreUniversidad)
+                lista=cur.fetchone()
+                print(lista)
+                if lista is not None:
+                    for e in lista:
+                        print(e)
+                        nombreAux=e
+            else:
+                flash("Selecciona el nombre de un administrador, no se agrego la universidad")
+                return redirect(url_for('mostrar_universidades'))
+            if nombreUniversidad==nombreAux:
+                print("Esa universidad ya esta registrada")
+                flash("Esa universidad ya existe!")
+                return redirect(url_for('mostrar_universidades'))
+            else:
+                print("Estas procediendo a registrarla")
+                consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
+                cur.execute(consulta, nombreAdmin)
+                lista = cur.fetchall()
+                print(lista)
                 for e in lista:
+                    id_admin = e
                     print(e)
-                    nombreAux=e
+                consulta = ("insert into Universidad (id_administrador, nombre_universidad, promedio) values(%s, %s, %s);")
+                cur.execute(consulta, (id_admin, nombreUniversidad, 0.0))
+                conexion.commit()
+                flash("Se agrego universidad con exito")
+                return redirect(url_for('mostrar_universidades'))
         else:
-            flash("Selecciona el nombre de un administrador, no se agrego la universidad")
-            return redirect(url_for('mostrar_universidades'))
-        if nombreUniversidad==nombreAux:
-            print("Esa universidad ya esta registrada")
-            flash("Esa universidad ya existe!")
-            return redirect(url_for('mostrar_universidades'))
-        else:
-            print("Estas procediendo a registrarla")
-            consulta = ("select id_administrador from Administrador where nombre_admin=%s;")
-            cur.execute(consulta, nombreAdmin)
-            lista = cur.fetchall()
-            print(lista)
-            for e in lista:
-                id_admin = e
-                print(e)
-            consulta = ("insert into Universidad (id_administrador, nombre_universidad, promedio) values(%s, %s, %s);")
-            cur.execute(consulta, (id_admin, nombreUniversidad, 0.0))
-            conexion.commit()
-            flash("Se agrego universidad con exito")
-            return redirect(url_for('mostrar_universidades'))
-    else:
-        flash("Debese iniciar sesion para acceder a esta funcion")
-        redirect(url_for('loginAdmin'))
+            flash("Debese iniciar sesion para acceder a esta funcion")
+            redirect(url_for('loginAdmin'))
+    elif request.method == "GET":
+        return redirect(url_for('mostrar_universidades'))
 
 @app.route('/llenareditar/<string:id>', methods=['GET', 'POST'])#esta parte es para llenar el formulario con los datos traidos de "mostrar universiadades"
 def llenareditar(id):

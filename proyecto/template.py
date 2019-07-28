@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
 import pymysql #el conector de la base de datos
 import os #para manejar archivos
-import pytesseract
-import image
+#import pytesseract
+#import image
 app = Flask(__name__)
 app.secret_key = "123"
 conexion = pymysql.connect("localhost", "root", "", "base")
@@ -772,4 +772,4 @@ def cerrarSesionUsuario():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0')
+    app.run()
